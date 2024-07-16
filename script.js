@@ -1,20 +1,65 @@
-// SVG Spring Animation
-const { styler, spring, listen, pointer, value } = window.popmotion;
+/// Swiper
 
-const ball = document.querySelector(".brand");
-const divStyler = styler(ball);
-const ballXY = value({ x: 0, y: 0 }, divStyler.set);
+const swiper = new Swiper(".swiper", {
+  // Optional parameters
+  direction: "horizontal",
+  loop: true,
 
-listen(ball, "mousedown touchstart").start((e) => {
-  e.preventDefault();
-  pointer(ballXY.get()).start(ballXY);
+  // If we need pagination
+  // pagination: {
+  // el: ".swiper-pagination",
+  // },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+
+  // And if we need scrollbar
+  scrollbar: {
+    el: ".swiper-scrollbar",
+  },
 });
 
-listen(document, "mouseup touchend").start(() => {
-  spring({
-    from: ballXY.get(),
-    velocity: ballXY.getVelocity(),
-    to: { x: 0, y: 0 },
-    stiffness: 200,
-  }).start(ballXY);
+// Palindrome Checker
+
+// Set the DOM
+
+const palindromeCheckBtn = document.getElementById("check-btn");
+const palindromeUserInput = document.getElementById("text-input");
+
+// Functions
+
+const checkPalindrome = (originalUserInput) => {
+  const UserInput = originalUserInput
+    .replace(/[^a-zA-Z0-9]/g, "") // remove all non-alphanumeric characters
+    .toLowerCase(); // turn everything into the same case (lower)
+  if (UserInput === "") {
+    window.alert("Please input a value");
+  } else if (UserInput === UserInput.split("").reverse().join("")) {
+    window.alert("Palindrome"); // teste
+    return console.log(UserInput); // teste
+  } else {
+    window.alert("Not Palindrome"); // teste
+    return console.log(UserInput); // teste
+  }
+};
+
+// Event Listeners
+
+palindromeCheckBtn.addEventListener("click", () => {
+  checkPalindrome(palindromeUserInput.value);
+  palindromeUserInput.value = ""; // clear the input text in the html
 });
+
+palindromeUserInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    checkPalindrome(palindromeUserInput.value);
+    palindromeUserInput.value = "";
+  }
+});
+
+const formattedDate = `abc`;
+
+console.log(formattedDate.split("").reverse().join(""));

@@ -22,44 +22,45 @@ const swiper = new Swiper(".swiper", {
   },
 });
 
-// Palindrome Checker
+/// Palindrome Checker
 
 // Set the DOM
 
-const palindromeCheckBtn = document.getElementById("check-btn");
-const palindromeUserInput = document.getElementById("text-input");
+const palindromeCheckBtn = document.getElementById("check-btn"); // set the "Check" buttom
+const palindromeUserInput = document.getElementById("text-input"); // set the "text-input"
+const palindromeResult = document.getElementById("result"); // set the "result"
 
 // Functions
 
 const checkPalindrome = (originalUserInput) => {
-  const UserInput = originalUserInput
+  const cleanUserInput = originalUserInput
     .replace(/[^a-zA-Z0-9]/g, "") // remove all non-alphanumeric characters
     .toLowerCase(); // turn everything into the same case (lower)
-  if (UserInput === "") {
+  if (cleanUserInput === "") {
     window.alert("Please input a value");
-  } else if (UserInput === UserInput.split("").reverse().join("")) {
-    window.alert("Palindrome"); // teste
-    return console.log(UserInput); // teste
+  } else if (cleanUserInput === cleanUserInput.split("").reverse().join("")) {
+    // if the cleanUserInput is the same forward and backwards
+    palindromeResult.innerText = `${originalUserInput} is a palindrome`; // change the result text
+    palindromeResult.style.color = "green"; // change the result color
   } else {
-    window.alert("Not Palindrome"); // teste
-    return console.log(UserInput); // teste
+    palindromeResult.innerText = `${originalUserInput} is not a palindrome`; // change the result text
+    palindromeResult.style.color = "red"; // change the result color
   }
+  palindromeResult.classList.remove("hidden"); // show the result
 };
 
 // Event Listeners
 
+// add event "click" to the Check btn
 palindromeCheckBtn.addEventListener("click", () => {
-  checkPalindrome(palindromeUserInput.value);
+  checkPalindrome(palindromeUserInput.value); // take the value of text input and execute the ckeckPalindrome function
   palindromeUserInput.value = ""; // clear the input text in the html
 });
 
+// add event "Enter" to the Check btn
 palindromeUserInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
-    checkPalindrome(palindromeUserInput.value);
-    palindromeUserInput.value = "";
+    checkPalindrome(palindromeUserInput.value); // take the value of text input and execute the ckeckPalindrome function
+    palindromeUserInput.value = ""; // clear the input text in the html
   }
 });
-
-const formattedDate = `abc`;
-
-console.log(formattedDate.split("").reverse().join(""));
